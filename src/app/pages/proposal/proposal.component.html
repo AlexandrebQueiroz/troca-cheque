@@ -1,0 +1,168 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="needs-validation" novalidate *ngIf="!expand">
+  <nb-card>
+
+    <nb-card-header>
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-12 mb-3">
+          <div class="label">Data da troca:</div>
+          <input
+            type="text"
+            nbInput
+            class="form-control"
+            fullWidth
+            [status]=getStatus(currentDate)
+            [formControl]="currentDate"
+            [nbDatepicker]="currentDatePicker"
+            (dateChange)="onCurrentDateChange($event)"
+            placeholder="Data da Troca">
+
+          <nb-datepicker #currentDatePicker></nb-datepicker>
+        </div>
+
+        <div class="offset-lg-6 col-lg-3 offset-md-4 col-md-4 mb-3">
+          <div class="label">Visualização Simplificado:</div>
+          <nb-checkbox
+            status="basic"
+            [(ngModel)]="simplificado"
+            [ngModelOptions]="{standalone: true}">
+              Visualização Simplificado
+            </nb-checkbox>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-12 mb-3">
+          <div class="label">Juros ao mês:</div>
+          <input
+            fullWidth
+            nbInput
+            type="text"
+            class="form-control"
+            [status]=getStatus(fee)
+            [formControl]="fee"
+            mask="0*,0000"
+            prefix="% "
+            placeholder="Juros ao mês:">
+
+        </div>
+      </div>
+    </nb-card-header>
+
+    <nb-card-header>
+      <nb-accordion>
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+            Valores
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+
+            <div class="row">
+              <div class="col-md-4 col-12 form-group">
+                <div class="label">Data de Vencimento:*</div>
+                <input
+                  nbInput
+                  fullWidth
+                  type="text"
+                  class="form-control"
+                  [formControl]="dueDate"
+                  [status]="getStatus(dueDate)"
+                  [nbDatepicker]="dueDatePicker"
+                  placeholder="Data de Vencimento">
+                  <nb-datepicker #dueDatePicker></nb-datepicker>
+              </div>
+
+              <div class="col-md-4 col-12 form-group">
+                <div class="label">Valor Cheque:*</div>
+                <input
+                  nbInput
+                  fullWidth
+                  type="text"
+                  mask="separator.2"
+                  [thousandSeparator]="'.'"
+                  [decimalMarker]="','"
+                  prefix="R$ "
+                  [formControl]="value"
+                  [status]="getStatus(value)"
+                  class="form-control"
+                  status="basic"
+                  placeholder="Valor Cheque">
+              </div>
+
+              <div class="col-md-4 col-12 form-group">
+                <div class="label">Dias para Compensar:*</div>
+                <input
+                  nbInput
+                  fullWidth
+                  type="text"
+                  mask="0"
+                  class="form-control"
+                  [formControl]="days"
+                  [status]="getStatus(days)"
+                  placeholder="Dias para compensar">
+              </div>
+            </div>
+
+            <div class="row" *ngIf="!simplificado">
+              <div class="col-md-3 col-12 form-group">
+                <div class="label">Titular:</div>
+                <input type="text" nbInput class="form-control" fullWidth status="basic" placeholder="Titular" disabled>
+              </div>
+
+              <div class="col-md-3 col-12 form-group">
+                <div class="label">Banco:</div>
+                <input type="text" nbInput class="form-control" fullWidth status="basic" placeholder="Banco" disabled>
+              </div>
+
+              <div class="col-md-3 col-12 form-group">
+                <div class="label">Agência:</div>
+                <input type="text" nbInput class="form-control" fullWidth status="basic" placeholder="Agência" disabled>
+              </div>
+
+              <div class="col-md-3 col-12 form-group">
+                <div class="label">Número do cheque:</div>
+                <input type="text" nbInput class="form-control" fullWidth status="basic" placeholder="Número do cheque" disabled>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="offset-lg-9 col-lg-3 offset-md-8 col-md-4 col-12 form-group">
+                <div class="label">Adicionar</div>
+                <button nbButton outline  type="submit" fullWidth status="basic">Adicionar</button>
+              </div>
+            </div>
+
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </nb-card-header>
+
+    <nb-card-body *ngIf="checkbook.length">
+      <div class="row">
+
+        <div class="col-12 p-1">
+
+          <button  nbButton outline type="button" (click)="onExpand()" status="basic" class="float-right m-3 p-3">
+            <nb-action icon="expand-outline"></nb-action>
+          </button>
+
+        </div>
+
+        <div class="col-12">
+          <ngx-proposal-detail [simplificado]="simplificado" [checkbook]="checkbook" [legend]="legend" ></ngx-proposal-detail>
+        </div>
+      </div>
+    </nb-card-body>
+
+  </nb-card>
+</form>
+
+
+<nb-card *ngIf="expand">
+  <nb-card-body>
+    <button  nbButton outline type="button" (click)="onCompact()" status="basic" class="float-right m-3 p-3">
+      <nb-action icon="collapse-outline"></nb-action>
+    </button>
+    <ngx-proposal-detail  [simplificado]="simplificado" [checkbook]="checkbook" [legend]="legend" ></ngx-proposal-detail>
+  </nb-card-body>
+</nb-card>
