@@ -11,6 +11,10 @@ import { ProposalLegend } from '../../@library/interfaces/proposal-legend.compon
 })
 export class ProposalComponent implements OnInit {
 
+  @ViewChild('datepicker')
+  public currentDatePicker;
+
+
   public simplificado = true;
   public submmited = false;
   public expand = false;
@@ -25,6 +29,7 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.subscribe();
   }
 
   public createForm() {
@@ -56,6 +61,11 @@ export class ProposalComponent implements OnInit {
           Validators.required,
       ]),
 
+    });
+  }
+  private subscribe(){
+    this.currentDatePicker.dateChange.subscribe(e =>{
+      console.log("ONCHANGE....");
     });
   }
 

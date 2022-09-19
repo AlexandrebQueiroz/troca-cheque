@@ -159,10 +159,9 @@
 
 
 <nb-card *ngIf="expand">
-  <nb-card-body>
     <button nbButton outline type="button" (click)="onCompact()" status="basic" class="float-right m-3 p-3">
       <nb-icon icon="collapse-outline"></nb-icon>
     </button>
+
     <ngx-proposal-detail  [simplificado]="simplificado" [checkbook]="checkbook" [legend]="legend" ></ngx-proposal-detail>
-  </nb-card-body>
 </nb-card>
