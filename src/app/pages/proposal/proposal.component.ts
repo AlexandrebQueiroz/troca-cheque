@@ -92,7 +92,7 @@ export class ProposalComponent implements OnInit {
     }, 0);
 
     if(this.checkbook.length){
-      this.legend.days = this.legend.days/(this.checkbook.length +1)
+      this.legend.days = this.legend.days/(this.checkbook.length)
     }
 
     this.legend.payed = this.checkbook.reduce((accumulator, obj) => {
@@ -102,12 +102,7 @@ export class ProposalComponent implements OnInit {
     this.legend.toReceiver = this.checkbook.reduce((accumulator, obj) => {
       return accumulator + obj.toReceiver;
     }, 0);
-
-
-
   }
-
-
 
   public getStatus(field: AbstractControl): string {
 

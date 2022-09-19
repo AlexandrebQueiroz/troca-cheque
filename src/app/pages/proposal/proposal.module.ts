@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbAccordionModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
+import { NbAccordionModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbInputModule, NbIconModule } from '@nebular/theme';
 import { NgxMaskModule } from 'ngx-mask';
 import { PipeModule } from './../../@library/pipe/pipe.module';
 import { ProposalDetailComponent } from './proposal-detail/proposal-detail.component';
@@ -21,6 +21,7 @@ import { ProposalComponent } from './proposal.component';
     NbCheckboxModule,
     NbDatepickerModule,
     PipeModule,
+    NbIconModule,
     NgxMaskModule.forChild(),
   ],
   declarations: [
