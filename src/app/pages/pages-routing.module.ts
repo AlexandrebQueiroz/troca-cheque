@@ -11,6 +11,11 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
+      path: 'proposal',
+      loadChildren: () => import('./proposal/proposal.module')
+        .then(m => m.ProposalModule),
+    },
+    {
       path: 'dashboard',
       component: ECommerceComponent,
     },
